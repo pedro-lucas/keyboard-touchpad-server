@@ -1,0 +1,12 @@
+.toolbar-view {
+  height: 50px;
+  background-color: black;
+  padding: 10px;
+}
+
+.toolbar-view button {
+  padding: 10px 20px;
+  border: 0;
+  background-color: red;
+  color: white;
+}

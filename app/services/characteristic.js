@@ -18,14 +18,15 @@ class ReadWriteNotifyCharacteristic extends BlenoCharacteristic {
   }
 
   onReadRequest(offset, callback) {
+    console.log('onReadRequest', offset, callback);
     callback(this.RESULT_SUCCESS, "");
   }
 
   onWriteRequest(data, offset, withoutResponse, callback) {
     this.value = data;
-    console.log('Characteristic - onWriteRequest: value = ' + this.value.toString('utf8'));
+    console.log('Characteristic - onWriteRequest: value =', this.value.toString('utf8'), offset, withoutResponse);
     if (this.updateValueCallback) {
-      console.log('Characteristic - onWriteRequest: notifying');
+      console.log('Characteristic - notifying');
       this.updateValueCallback(this.value);
     }
     callback(this.RESULT_SUCCESS);
@@ -37,8 +38,8 @@ class ReadWriteNotifyCharacteristic extends BlenoCharacteristic {
   }
 
   onUnsubscribe() {
-    console.log('Characteristic - onUnsubscribe');
     super.onUnsubscribe();
+    console.log('Characteristic - onUnsubscribe');
   }
 
   onNotify() {

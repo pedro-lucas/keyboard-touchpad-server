@@ -1,7 +1,7 @@
 'use strict';
 
 const bleno = require('bleno');
-const KeyboardPadService = require('./service');
+const KeyboardPadService = require('./keyboard-touchpad-service');
 
 bleno.on('stateChange', function(state) {
   console.log('on -> stateChange: ' + state + ', address = ' + bleno.address);
@@ -12,7 +12,7 @@ bleno.on('stateChange', function(state) {
   }
 });
 
-/* Linux only events */
+/* Linux events only */
 
 bleno.on('accept', function(clientAddress) {
   console.log('on -> accept, client: ' + clientAddress);

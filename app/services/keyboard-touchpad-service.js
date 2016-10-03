@@ -4,7 +4,7 @@ const bleno = require('bleno');
 const BlenoPrimaryService = bleno.PrimaryService;
 const ReadWriteNotifyCharacteristic = require('./characteristic');
 
-class KeyboardPadService extends BlenoPrimaryService {
+class KeyboardTouchpadService extends BlenoPrimaryService {
 
   constructor() {
     super({
@@ -17,4 +17,4 @@ class KeyboardPadService extends BlenoPrimaryService {
 
 }
 
-module.exports = KeyboardPadService;
+module.exports = KeyboardTouchpadService;
