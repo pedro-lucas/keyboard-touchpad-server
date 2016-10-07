@@ -1,0 +1,17 @@
+.devices-view {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.devices-view table {
+  width: 100%;
+}
+
+.devices-view table tr td:first-child, .devices-view table tr th:first-child {
+  width: 1px;
+}

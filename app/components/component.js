@@ -22,6 +22,7 @@ module.exports = class Component extends EventEmitter {
     }
     component.superComponent = this;
     this.components.push(component);
+    if(component.view.parent().length) return;
     this.view.append(component.view);
   }
 

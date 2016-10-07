@@ -1,12 +1,30 @@
 .toolbar-view {
-  height: 50px;
-  background-color: black;
-  padding: 10px;
+  background-color: #21252b;
+}
+
+.toolbar-view .mdl-layout__header-row {
+  padding: 0 16px;
 }
 
 .toolbar-view button {
-  padding: 10px 20px;
-  border: 0;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+}
+
+.toolbar-view button.delete {
   background-color: red;
-  color: white;
+}
+
+.toolbar-view button.delete:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.toolbar-view button.add {
+  background-color: green;
+}
+
+.toolbar-view button.add:hover {
+  background-color: rgba(0, 120, 0, 0.8);
 }

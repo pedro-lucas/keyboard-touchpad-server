@@ -9,7 +9,7 @@ let winMonitor = null;
 let tray = null;
 
 if(process.platform == 'darwin') {
-  app.dock.hide();
+  // app.dock.hide();
 }
 
 app.on('ready', () => {
@@ -21,7 +21,8 @@ app.on('ready', () => {
   winMonitor = new BrowserWindow({
     width: 400,
     height: 400,
-    frame: false,
+    frame: true,
+    // frame: false,
     show: false
   });
 
@@ -29,9 +30,9 @@ app.on('ready', () => {
     winMonitor = null;
   });
 
-  winMonitor.on('blur', () => {
-    winMonitor.hide();
-  });
+  // winMonitor.on('blur', () => {
+  //   winMonitor.hide();
+  // });
 
   winMonitor.loadURL(`file://${__dirname}/static/index.html`);
 
@@ -72,6 +73,8 @@ app.on('ready', () => {
 
   tray.setToolTip('Keyboard Touchpad Server');
   tray.setContextMenu(contextMenu);
+
+  winMonitor.show();
 
 });
 

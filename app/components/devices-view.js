@@ -2,12 +2,12 @@
 
 const $ = require('jquery');
 const ComponentView = require('./component-view');
-const NotificationView = require('../library/notification-view');
 
-module.exports = class ToolbarView extends ComponentView {
+module.exports = class DevicesView extends ComponentView {
 
-  constructor() {
-    super($('.toolbar-view'));
+  constructor(toolbatView) {
+    super('devices-view');
+    this.toolbatView = toolbatView;
     this.initialize();
   }
 
@@ -16,12 +16,12 @@ module.exports = class ToolbarView extends ComponentView {
   }
 
   get cssClass() {
-    return 'toolbar-view';
+    return 'devices-view';
   }
 
   get ui() {
     return {
-      
+
     };
   }
 
