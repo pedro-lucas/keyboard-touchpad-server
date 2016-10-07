@@ -12,6 +12,6 @@
   width: 100%;
 }
 
-.devices-view table tr td:first-child, .devices-view table tr th:first-child {
-  width: 1px;
+.devices-view table tr .selected {
+  background-color: rgba(96, 192, 220, 1);
 }

@@ -1,4 +1,4 @@
-<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable">
+<table class="mdl-data-table mdl-js-data-table">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Device Name</th>

@@ -8,11 +8,12 @@ module.exports = class DevicesView extends ComponentView {
   constructor(toolbatView) {
     super('devices-view');
     this.toolbatView = toolbatView;
-    this.initialize();
+    setTimeout(this.initialize.bind(this), 1);
   }
 
   initialize() {
-
+    this.tableView.find('tbody').append('<tr><td class="mdl-data-table__cell--non-numeric">Teste</td></tr>');
+    console.log('inputs', this.tableView.find('.mdl-data-table__select input'));
   }
 
   get cssClass() {
@@ -21,7 +22,7 @@ module.exports = class DevicesView extends ComponentView {
 
   get ui() {
     return {
-
+      tableView: 'table'
     };
   }
 
