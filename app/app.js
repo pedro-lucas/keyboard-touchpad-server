@@ -8,6 +8,10 @@ const KTServer = require('./services/server');
 let winMonitor = null;
 let tray = null;
 
+const {MenuFluent} = require('./menu.js');
+
+
+
 if(process.platform == 'darwin') {
   app.dock.hide();
 }
@@ -25,6 +29,8 @@ app.on('ready', () => {
     show: false
   });
 
+ 
+
   winMonitor.on('closed', () => {
     winMonitor = null;
   });
@@ -35,40 +41,47 @@ app.on('ready', () => {
 
   winMonitor.loadURL(`file://${__dirname}/static/index.html`);
 
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: 'Open Monitor',
+  let template = 
+    MenuFluent
+        .Menu('Open Monitor')
+          .Click(showWindow)
+        .Menu('Close Monitor')
+          .Click(hideWindow)
+          .Visible(false)
+        .Menu('Quit')
+          .Click(app.quit)
+        .Build();
 
-      click() {
+ function calcArea(){
+    const bounds = tray.getBounds();
+    let xBound = bounds.x;
+    let yBound = bounds.y;
 
-        const bounds = tray.getBounds();
-        let x = bounds.x;
-        let y = bounds.y;
-
-        if(x + winMonitor.width > workArea.width) {
-          x = workArea.width - winMonitor.width;
-        }
-
-        if(y + winMonitor.height > workArea.height) {
-          y = workArea.height - winMonitor.height;
-        }
-
-        winMonitor.setPosition(x, y);
-        winMonitor.isVisible() ? winMonitor.hide() : winMonitor.show();
-
-      }
-
-    },
-    {
-      label: 'Quit',
-
-      click() {
-        app.quit();
-      }
-
+    if(xBound + winMonitor.width > workArea.width) {
+      xBound = workArea.width - winMonitor.width;
     }
 
-  ]);
+    if(yBound + winMonitor.height > workArea.height) {
+      yBound = workArea.height - winMonitor.height;
+    }
+
+    return {
+      x : xBound,
+      y : yBound
+    };
+  }
+
+  function showWindow(){
+    const {x,y} = calcArea();
+    winMonitor.setPosition(x, y);
+    winMonitor.show();
+  };
+
+  function hideWindow(){
+    winMonitor.hide();
+  }
+
+  const contextMenu = Menu.buildFromTemplate(template);
 
   tray.setToolTip('Keyboard Touchpad Server');
   tray.setContextMenu(contextMenu);
