@@ -7,7 +7,7 @@ const NotificationView = require('../library/notification-view');
 module.exports = class ToolbarView extends ComponentView {
 
   constructor() {
-    super('toolbar');
+    super($('.toolbar-view'));
     this.initialize();
   }
 
@@ -21,7 +21,7 @@ module.exports = class ToolbarView extends ComponentView {
 
   get ui() {
     return {
-      'btnMenu': '.menu'
+      
     };
   }
 
