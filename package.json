@@ -14,7 +14,7 @@
   "dependencies": {
     "bleno": "^0.4.1",
     "i18n": "^0.8.3",
-    "jquery": "^3.1.1",
+    "jquery": "^3.2.1",
     "material-design-lite": "^1.2.1",
     "mdns": "^2.3.3",
     "octicons": "^4.4.0",
@@ -22,9 +22,9 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "electron-packager": "^8.1.0",
-    "electron-prebuilt": "^1.4.1",
-    "electron-rebuild": "^1.2.1",
+    "electron": "^1.7.6",
+    "electron-rebuild": "^1.6.0",
+    "electron-packager": "^9.1.0",
     "gulp": "^3.9.1"
   }
 }

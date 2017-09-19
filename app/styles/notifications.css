@@ -128,26 +128,34 @@ notification.notify-error .content {
 }
 notification .content {
     border-radius: 0 3px 3px 0;
-    padding: 11px;
 }
-notification.has-close .content {
+notification .content .item {
+    padding: 0.75em;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+notification .content .item:first-child {
+    border-top: 0;
+}
+notification.has-close .content .item:first-child {
     padding-right: 34px;
 }
 notification .content .content-message {
     font-weight: bold;
     font-size: 13px;
 }
-notification .content .content-detail {
+notification .content .content-detail, notification .content .content-custom {
     font-size: 13px;
 }
-notification.has-detail .content .content-detail {
-    margin-top: 10px;
+notification .content .content-custom {
+    background-color: rgba(255, 255, 255, 0.3);
+    background-clip: padding-box;
 }
 notification .btn-close {
     position: absolute;
     top: 0;
     right: 0;
-    padding-top: 3px;
+    padding-top: 1px;
     width: 34px;
     height: 34px;
     line-height: 34px;
@@ -179,17 +187,19 @@ notification .btn-close-all {
     border-radius: 4px;
     user-select: none;
     position: absolute;
-    top: 7px;
+    top: 5px;
     right: 7px;
     background: none;
-    border: 1px solid #555;
+    border: 1px solid rgba(70, 70, 70, 0.5);
     display: none;
+    color: black;
+    opacity: .4;
 }
 notification.has-close .btn-close-all {
     right: 38px;
 }
-notifications notification:first-child .content .content-message {
-    padding-right: 85px;
+notifications notification:first-child .content .item:first-child {
+    padding-right: 125px;
 }
 notifications notification:first-child .btn-close-all {
     display: inline-block;
@@ -197,11 +207,32 @@ notifications notification:first-child .btn-close-all {
 notifications notification:only-child .btn-close-all {
     display: none;
 }
-notifications notification:only-child .content .content-message {
+notifications notification:only-child .content .item:first-child {
     padding-right: 0px;
+}
+notifications notification.has-close:only-child .content .item:first-child {
+    padding-right: 34px;
 }
 notification.remove, notification.remove:hover {
     -webkit-animation: notification-hide 0.24s cubic-bezier(0.33859, -0.42, 1, -0.22), notification-shrink 0.24s 0.24s cubic-bezier(0.5, 0, 0, 1);
     -webkit-animation-fill-mode: forwards;
     margin-bottom: 0;
+}
+
+notification .content .content-custom .btn-retry {
+    top: 5px;
+    right: 5px;
+    padding: 0;
+    position: absolute;
+    background-color: transparent;
+    border:none;
+    opacity: .4;
+}
+
+notification .content .content-custom .btn-retry:hover {
+    opacity: 1;
+}
+
+notification .content .content-custom  .content-retry-message {
+    padding-right: 50px;
 }

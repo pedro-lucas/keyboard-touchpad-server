@@ -1,5 +1,3 @@
-'use strict';
-
 const Component = require('./component');
 
 module.exports = class ComponentView extends Component {

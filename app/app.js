@@ -1,4 +1,4 @@
-'use strict';
+require("./locale");
 
 const electron = require('electron');
 const {app, Menu, Tray, BrowserWindow} = electron;
@@ -9,8 +9,6 @@ let winMonitor = null;
 let tray = null;
 
 const {MenuFluent} = require('./menu.js');
-
-
 
 if(process.platform == 'darwin') {
   // app.dock.hide();
@@ -30,7 +28,7 @@ app.on('ready', () => {
     show: false
   });
 
- 
+
 
   winMonitor.on('closed', () => {
     winMonitor = null;
@@ -42,7 +40,7 @@ app.on('ready', () => {
 
   winMonitor.loadURL(`file://${__dirname}/static/index.html`);
 
-  let template = 
+  let template =
     MenuFluent
         .Menu('Open Monitor')
           .Click(showWindow)

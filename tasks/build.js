@@ -1,19 +1,21 @@
-'use strict';
-
 const gulp = require('gulp');
 const packager = require('electron-packager');
+const path = require('path');
+const baseDir = path.dirname(__dirname);
+const info = require('../package');
 
 gulp.task('build', function () {
 
-  const path = require('path');
-  const baseDir = path.dirname(__dirname);
-
   let options = {
       dir: baseDir,
-      'app-version': '0.0.1',
-      'build-version': '0.0.1',
+      name: info.config.name,
+      version: info.version,
+      'app-version': info.name,
+      'build-version': info.config['build-version'],
+      'app-bundle-id': info.config['app-bundle-id'],
       arch: process.arch,
       platform: process.platform,
+      overwrite: true,
       asar: false,
       ignore: [
           path.join(baseDir, '.git'),
@@ -26,19 +28,15 @@ gulp.task('build', function () {
           path.join(baseDir, 'gulpfile.js'),
           path.join(baseDir, 'README.md')
       ],
-      name: 'Electron Boilerplate',
-      out: path.join(baseDir, 'build'),
-      overwrite: true,
-      version: '1.2.8',
-      'app-bundle-id': 'com.electorn.boilerplate'
+      out: path.join(baseDir, 'build')
   };
 
   packager(options, (err, appPaths) => {
       if(err) {
-          console.error('Ops, An error ocurred in the build', err);
-          return;
+        console.error('Ops, An error ocurred in the build', err);
+      }else{
+        console.log('Build finished', appPaths);
       }
-      console.log('Build finished', appPaths);
   });
 
 });
