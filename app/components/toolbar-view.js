@@ -6,42 +6,34 @@ const i18n = require("i18n");
 module.exports = class ToolbarView extends ComponentView {
 
   constructor() {
-    super();
+    super($('.toolbar-view'));
     this.init();
   }
 
   init() {
-    this.btnMenu.on('click', this.showNotification.bind(this));
+    this.btnAdd.on('click', this.actionAdd.bind(this));
   }
 
-  showNotification(evt) {
-    NotificationView.info(i18n.__("Hello world!! %s", "NotificationView.info"), {dismissable: true});
-    NotificationView.error(i18n.__("Hello world!! %s", "NotificationView.error"), {dismissable: true});
-    NotificationView.success(i18n.__("Hello world!! %s", "NotificationView.success"), {dismissable: true});
-    NotificationView.warning(i18n.__("Hello world!! %s", "NotificationView.warning"), {dismissable: true});
-    let notify = NotificationView.retry(i18n.__("Hello world!! %s", "NotificationView.retry"), i18n.__("Try again"), {dismissable: true, onRetry: () => {
+  actionAdd(evt) {
+    NotificationView.info("Hello world!! NotificationView.info", {dismissable: true});
+    NotificationView.error("Hello world!! NotificationView.error", {dismissable: true});
+    NotificationView.success("Hello world!! NotificationView.success", {dismissable: true});
+    NotificationView.warning("Hello world!! NotificationView.warning", {dismissable: true});
+    let notify = NotificationView.retry("Hello world!! NotificationView.retry", "Try again", {dismissable: true, onRetry: () => {
       notify.dismiss();
-      NotificationView.info(i18n.__('This message will dismiss!!'));
+      NotificationView.info('This message will dismiss!!');
     }});
   }
 
-  get cssClass() {
-    return 'toolbar-view';
+  actionDelete(evt) {
+    this.actionAdd(evt);
   }
 
   get ui() {
     return {
-      'btnMenu': '.menu'
+      'btnAdd': '.add',
+      'btnDelete': '.delete'
     };
-  }
-
-  get templateObject() {
-    return {
-      name: 'toolbar',
-      args: {
-        action: i18n.__('Action')
-      }
-    }
   }
 
 }
