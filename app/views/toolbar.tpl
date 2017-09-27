@@ -14,7 +14,7 @@
       </nav>
     </section>
     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-      <a href="#" class="material-icons mdc-toolbar__icon--menu delete" alt="Settings">settings</a>
+      <a href="#" class="material-icons mdc-toolbar__icon--menu settings" alt="Settings">settings</a>
     </section>
   </div>
 </header>

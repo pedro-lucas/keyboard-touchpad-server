@@ -11,22 +11,27 @@ module.exports = class ToolbarView extends ComponentView {
   }
 
   init() {
-    this.btnAdd.on('click', this.actionAdd.bind(this));
+    this.tabs.on('click', this.actionChangeTabs.bind(this));
+    this.btnSettings.on('click', this.actionSettings.bind(this));
   }
 
-  actionAdd(evt) {
-    NotificationView.info("Hello world!! NotificationView.info", {dismissable: true});
-    NotificationView.error("Hello world!! NotificationView.error", {dismissable: true});
-    NotificationView.success("Hello world!! NotificationView.success", {dismissable: true});
-    NotificationView.warning("Hello world!! NotificationView.warning", {dismissable: true});
-    let notify = NotificationView.retry("Hello world!! NotificationView.retry", "Try again", {dismissable: true, onRetry: () => {
-      notify.dismiss();
-      NotificationView.info('This message will dismiss!!');
-    }});
+  actionChangeTabs(evt) {
+    const $target = $(evt.currentTarget);
+    if(!$target.hasClass('mdc-tab--active')) {
+      this.tabs.removeClass('mdc-tab--active');
+      $target.addClass('mdc-tab--active');
+      this.emit(ToolbarView.EVENT_CHANGE_TAB, {
+        evt: evt,
+        target: $target,
+        id: $target.attr('href')
+      });
+    }
   }
 
-  actionDelete(evt) {
-    this.actionAdd(evt);
+  actionSettings(evt) {
+    this.emit(ToolbarView.EVENT_ACTION_SETTINGS, {
+      evt: evt
+    });
   }
 
   get templateObject() {
@@ -43,13 +48,17 @@ module.exports = class ToolbarView extends ComponentView {
 
   get ui() {
     return {
-      'btnAdd': '.add',
-      'btnDelete': '.delete'
+      'tabs': '.mdc-tab-bar a',
+      'btnSettings': '.settings'
     };
   }
 
-  static get EVENT_DELETE() {
-    return 'event-delete';
+  static get EVENT_CHANGE_TAB() {
+    return 'event-change-tab';
+  }
+
+  static get EVENT_ACTION_SETTINGS() {
+    return 'event-action-settings';
   }
 
 }
