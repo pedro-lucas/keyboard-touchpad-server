@@ -8,7 +8,6 @@ module.exports = class DevicesBluetoothView extends DevicesView {
   constructor(args) {
     super(args);
     this.view.attr('id', 'tab-bluetooth');
-    this.view.html('bluetooth');
   }
 
 }

@@ -8,7 +8,6 @@ module.exports = class DevicesWifiView extends DevicesView {
   constructor(args) {
     super(args);
     this.view.attr('id', 'tab-wifi');
-    this.view.html('wifi');
   }
 
 }

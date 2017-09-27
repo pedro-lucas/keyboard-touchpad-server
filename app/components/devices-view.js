@@ -59,7 +59,11 @@ module.exports = class DevicesView extends ComponentView {
 
   get templateObject() {
     return {
-      name: 'devices-view'
+      name: 'devices-view',
+      args: {
+        "paired_devices": i18n.__('Paired devices'),
+        "available_devices": i18n.__('Available devices')
+      }
     };
   }
 

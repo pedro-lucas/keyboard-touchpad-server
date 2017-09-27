@@ -1,4 +1,6 @@
 {
   "Device Name": "Device Name",
-  "Mode": "Mode"
+  "Mode": "Mode",
+  "Paired devices": "Paired devices",
+  "Available devices": "Available devices"
 }

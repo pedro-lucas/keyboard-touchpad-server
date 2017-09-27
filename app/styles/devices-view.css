@@ -9,3 +9,25 @@
 .devices-view.active {
   display: block;
 }
+
+.devices-view h3 {
+  font-weight: bold;
+}
+
+.devices-view .grey-bg {
+  background-color: gray;
+}
+
+.devices-view .align-ico {
+  margin-right: 15px;
+  height: 25px;
+  width: 20px;
+}
+
+.devices-view .available-list {
+  cursor: pointer;
+}
+
+.devices-view a {
+  color: #21252b;
+}
