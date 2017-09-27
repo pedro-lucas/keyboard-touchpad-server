@@ -2,6 +2,10 @@
   background-color: #21252b;
 }
 
+.toolbar-view .mdc-toolbar .mdc-tab-bar {
+  width: 100%;
+}
+
 .toolbar-view .mdc-toolbar .mdc-tab-bar .mdc-tab:after {
   background-color: rgba(96, 192, 220, 1);
 }

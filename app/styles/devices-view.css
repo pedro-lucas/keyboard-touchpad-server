@@ -3,4 +3,9 @@
   height: calc(100% - 72px);
   background-color: white;
   overflow-y: auto;
+  display: none;
+}
+
+.devices-view.active {
+  display: block;
 }

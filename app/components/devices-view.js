@@ -1,5 +1,3 @@
-'use strict';
-
 const $ = require('jquery');
 const ComponentView = require('./component-view');
 const Device = require('../models/device');
@@ -7,9 +5,9 @@ const i18n = require("i18n");
 
 module.exports = class DevicesView extends ComponentView {
 
-  constructor(toolbatView) {
+  constructor(toolbarView) {
     super();
-    this.toolbatView = toolbatView;
+    this.toolbarView = toolbarView;
     this.devices = [];
     this.initialize();
   }
@@ -43,21 +41,25 @@ module.exports = class DevicesView extends ComponentView {
 
   }
 
+  show() {
+    this.view.addClass('active');
+  }
+
+  hide() {
+    this.view.removeClass('active');
+  }
+
   get cssClass() {
     return 'devices-view';
   }
 
   get ui() {
-    return {tableView: 'table'};
+    return {listView: 'list'};
   }
 
   get templateObject() {
     return {
-      name: 'devices-view',
-      args: {
-        deviceName: i18n.__('Device Name'),
-        mode: i18n.__('Mode')
-      }
+      name: 'devices-view'
     };
   }
 

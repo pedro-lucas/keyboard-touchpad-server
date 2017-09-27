@@ -17,14 +17,21 @@ module.exports = class ToolbarView extends ComponentView {
 
   actionChangeTabs(evt) {
     const $target = $(evt.currentTarget);
-    if(!$target.hasClass('mdc-tab--active')) {
+    this.selectTab($target.attr('href').substring(1), evt);
+  }
+
+  selectTab(id, evt) {
+    if(!this.view.find(`a[href="#${id}"]`).hasClass('mdc-tab--active')) {
       this.tabs.removeClass('mdc-tab--active');
-      $target.addClass('mdc-tab--active');
-      this.emit(ToolbarView.EVENT_CHANGE_TAB, {
-        evt: evt,
-        target: $target,
-        id: $target.attr('href')
-      });
+      this.view.find(`a[href="#${id}"]`).addClass('mdc-tab--active');
+      if(evt) {
+        const $target = $(evt.currentTarget);
+        this.emit(ToolbarView.EVENT_CHANGE_TAB, {
+          evt: evt,
+          target: $target,
+          id: id
+        });
+      }
     }
   }
 

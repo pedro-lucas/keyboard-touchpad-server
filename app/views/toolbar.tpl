@@ -2,11 +2,11 @@
   <div class="mdc-toolbar__row">
     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
       <nav class="mdc-tab-bar mdc-tab-bar--icons-with-text">
-        <a class="mdc-tab mdc-tab--with-icon-and-text mdc-tab--active" href="#bluetooth">
+        <a class="mdc-tab mdc-tab--with-icon-and-text" href="#tab-bluetooth">
           <i class="material-icons mdc-tab__icon" aria-hidden="true">bluetooth</i>
           <span class="mdc-tab__icon-text">Bluetooth</span>
         </a>
-        <a class="mdc-tab mdc-tab--with-icon-and-text" href="#wifi">
+        <a class="mdc-tab mdc-tab--with-icon-and-text" href="#tab-wifi">
           <i class="material-icons mdc-tab__icon" aria-hidden="true">wifi</i>
           <span class="mdc-tab__icon-text">Wifi</span>
         </a>
