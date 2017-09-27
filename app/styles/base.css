@@ -29,3 +29,13 @@ a {
 .hidden {
   display: none;
 }
+
+main.content {
+  position: relative;
+  display: block;
+  height: calc(100% - 64px);
+}
+
+.component {
+  position: relative;
+}

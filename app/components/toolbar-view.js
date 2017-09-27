@@ -6,7 +6,7 @@ const i18n = require("i18n");
 module.exports = class ToolbarView extends ComponentView {
 
   constructor() {
-    super($('.toolbar-view'));
+    super();
     this.init();
   }
 
@@ -29,11 +29,27 @@ module.exports = class ToolbarView extends ComponentView {
     this.actionAdd(evt);
   }
 
+  get templateObject() {
+    return {
+      name: 'toolbar',
+      args: {
+      }
+    };
+  }
+
+  get cssClass() {
+    return 'toolbar-view';
+  }
+
   get ui() {
     return {
       'btnAdd': '.add',
       'btnDelete': '.delete'
     };
+  }
+
+  static get EVENT_DELETE() {
+    return 'event-delete';
   }
 
 }

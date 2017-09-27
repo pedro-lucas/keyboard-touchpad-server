@@ -1,30 +1,23 @@
-.toolbar-view {
+.toolbar-view .mdc-toolbar__row {
   background-color: #21252b;
 }
 
-.toolbar-view .mdl-layout__header-row {
-  padding: 0 16px;
+.toolbar-view .mdc-toolbar .mdc-tab-bar .mdc-tab:after {
+  background-color: rgba(96, 192, 220, 1);
 }
 
-.toolbar-view button {
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  min-height: 40px;
+.toolbar-view .mdc-toolbar .mdc-tab-bar a i, .toolbar-view .mdc-tab-bar a span {
+  color: white;
 }
 
-.toolbar-view button.delete {
-  background-color: red;
+.toolbar-view .mdc-tab-bar a:hover {
+  opacity: 0.5;
 }
 
-.toolbar-view button.delete:hover {
-  background-color: rgba(255, 0, 0, 0.8);
+.toolbar-view .mdc-tab-bar .mdc-tab--active {
+  cursor: default;
 }
 
-.toolbar-view button.add {
-  background-color: green;
-}
-
-.toolbar-view button.add:hover {
-  background-color: rgba(0, 120, 0, 0.8);
+.toolbar-view .mdc-tab-bar .mdc-tab--active:hover {
+  opacity: 0.87;
 }
