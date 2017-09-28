@@ -1,5 +1,3 @@
-'use strict';
-
 const bleno = require('bleno');
 const KeyboardPadService = require('./keyboard-touchpad-service');
 const kServerUUID = 'b0d0';

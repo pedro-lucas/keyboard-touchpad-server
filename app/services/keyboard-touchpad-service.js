@@ -1,5 +1,3 @@
-'use strict';
-
 const bleno = require('bleno');
 const BlenoPrimaryService = bleno.PrimaryService;
 const ReadWriteNotifyCharacteristic = require('./characteristic');

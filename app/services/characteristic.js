@@ -1,5 +1,3 @@
-'use strict';
-
 const bleno = require('bleno');
 const BlenoCharacteristic = bleno.Characteristic;
 const Descriptor = require('./descriptor');

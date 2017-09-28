@@ -54,7 +54,10 @@ module.exports = class DevicesView extends ComponentView {
   }
 
   get ui() {
-    return {listView: 'list'};
+    return {
+      listPaired: '.paired-list',
+      listAvailable: '.available-list'
+    };
   }
 
   get templateObject() {
