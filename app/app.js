@@ -30,12 +30,17 @@ app.on('ready', () => {
 
 
 
-  winMonitor.on('closed', () => {
+  winMonitor.on('closed', event => {
     winMonitor = null;
   });
 
+  // winMonitor.on('close', event => {
+  //   event.preventDefault();
+  //   hideWindow();
+  // });
+
   // winMonitor.on('blur', () => {
-  //   winMonitor.hide();
+  //   hideWindow();
   // });
 
   winMonitor.loadURL(`file://${__dirname}/static/index.html`);
@@ -48,7 +53,9 @@ app.on('ready', () => {
           .Click(hideWindow)
           .Visible(false)
         .Menu('Quit')
-          .Click(app.quit)
+          .Click(evt => {
+            app.quit();
+          })
         .Build();
 
  function calcArea(){

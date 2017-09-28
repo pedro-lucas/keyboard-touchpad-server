@@ -1,5 +1,3 @@
-'use strict';
-
 const electron = require('electron');
 const {MenuItem} = electron;
 
