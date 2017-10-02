@@ -19,6 +19,7 @@
     "mdns": "^2.3.3",
     "octicons": "^4.4.0",
     "robotjs": "^0.4.4",
+    "socket-io": "^1.0.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
