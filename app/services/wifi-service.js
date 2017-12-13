@@ -1,6 +1,8 @@
 const Service = require('./service');
 const mdns = require('mdns');
+const tls = require('tls');
 const io = require('socket.io')(9453);
+
 
 class WifiService extends Service {
 
