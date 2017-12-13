@@ -7,9 +7,15 @@ class WifiService extends Service {
   constructor() {
     super();
     this.init();
+    this.ad = null;
+    this.devices = [];
   }
 
   init() {
+
+    this.ad = mdns.createAdvertisement(mdns.tcp('kts'), 9453);
+    this.ad.start();
+
     //TODO: O servidor fica ativo.
     //TODO: O Device solicita conexão.
     //TODO: O servidor pegunta se pode conectar, caso ainda não esteja na lista de autorizados

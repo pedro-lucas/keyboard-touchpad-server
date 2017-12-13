@@ -18,8 +18,8 @@
     "material-components-web": "^0.21.1",
     "mdns": "^2.3.3",
     "octicons": "^4.4.0",
-    "robotjs": "^0.4.4",
-    "socket-io": "^1.0.0",
+    "robotjs": "^0.4.7",
+    "socket.io": "^2.0.4",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
