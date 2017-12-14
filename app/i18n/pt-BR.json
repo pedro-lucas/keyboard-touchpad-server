@@ -1,4 +1,7 @@
 {
   "Device Name": "Nome do dispositivo",
+  "Welcome to server": "Bem vindo ao servidor",
+  "Invalid name or object": "Objeto ou nome inválido",
+  "Device is blocked": "O dispositivo está bloqueado",
   "Mode": "Modo"
 }

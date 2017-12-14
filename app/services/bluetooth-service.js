@@ -1,6 +1,6 @@
-const Service = require('./service');
+const Connection = require('./connection');
 
-class BluetoothService extends Service {
+class BluetoothService extends Connection {
   constructor() {
     super();
   }
