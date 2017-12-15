@@ -6,16 +6,20 @@ class Device extends Model {
     super();
     this.id = id != undefined ? id : "";
     this.name = name != undefined ? name : "";
-    this.platform = 1; //1-android, 2-ios, 3-web
+    this.platform = 1; //1-android, 2-ios, 3-web TODO: Tenho que definir como capturar essa informação
   }
 
   toString() {
-    return JSON.stringify({
+    return JSON.stringify(this.toRaw());
+  }
+
+  toRaw() {
+    return {
       id: this.id,
       name: this.name,
       platform: this.platform,
-      mode: this.mode
-    });
+      className: this.constructor.name
+    };
   }
 
   get mode() {

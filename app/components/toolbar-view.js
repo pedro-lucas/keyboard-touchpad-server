@@ -11,28 +11,7 @@ module.exports = class ToolbarView extends ComponentView {
   }
 
   init() {
-    this.tabs.on('click', this.actionChangeTabs.bind(this));
     this.btnSettings.on('click', this.actionSettings.bind(this));
-  }
-
-  actionChangeTabs(evt) {
-    const $target = $(evt.currentTarget);
-    this.selectTab($target.attr('href').substring(1), evt);
-  }
-
-  selectTab(id, evt) {
-    if(!this.view.find(`a[href="#${id}"]`).hasClass('mdc-tab--active')) {
-      this.tabs.removeClass('mdc-tab--active');
-      this.view.find(`a[href="#${id}"]`).addClass('mdc-tab--active');
-      if(evt) {
-        const $target = $(evt.currentTarget);
-        this.emit(ToolbarView.EVENT_CHANGE_TAB, {
-          evt: evt,
-          target: $target,
-          id: id
-        });
-      }
-    }
   }
 
   actionSettings(evt) {
@@ -55,13 +34,8 @@ module.exports = class ToolbarView extends ComponentView {
 
   get ui() {
     return {
-      'tabs': '.mdc-tab-bar a',
       'btnSettings': '.settings'
     };
-  }
-
-  static get EVENT_CHANGE_TAB() {
-    return 'event-change-tab';
   }
 
   static get EVENT_ACTION_SETTINGS() {

@@ -1,4 +1,5 @@
 const Connection = require('./connection');
+const Devices = require('./devices');
 const mdns = require('mdns');
 const server = require('http').createServer();
 const io = require('socket.io')(server);
@@ -20,12 +21,13 @@ class WifiService extends Connection {
     server.listen(PORT);
 
     io.on('connection', client => {
-      // const address = client.conn.remoteAddress;
-      // console.log('client', address);
+
+      let gInfo = null;
 
       const authorizeConnection = authorize => {
         if(authorize) {
-
+          let device = new WifiDevice(gInfo.id, gInfo.name, client);
+          Devices.addConnectedDevice(device);
         }
       };
 
@@ -35,17 +37,16 @@ class WifiService extends Connection {
         }else if(info.id && info.id.length >= 10 &&  this.blocked(info.id)) {
           client.emit('error', i18n.__('Device is blocked'))
         }else if(info.id && info.id.length >= 10 &&  this.paired(info.id)) {
-          //TODO: Emite evento que um novo dispositivo foi conectado
           authorizeConnection(true);
         }else{
+
+          gInfo = info;
 
           let rdn = crypto.randomBytes(20).toString('hex');
           info.id = crypto.createHash('sha1').update(rdn).digest('hex');
           info.callback = authorizeConnection;
 
           this.emit(WifiService.EVENT_REQUEST_CONNECTION, info);
-
-          //TODO: Emite um evento solicitando a autorização de conexão para o dispositivo, se autorizado, adiciona o dispositivo a lista de paired
 
         }
       };

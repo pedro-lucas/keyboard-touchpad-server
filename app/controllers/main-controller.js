@@ -1,7 +1,6 @@
 const Controller = require('./controller');
 const ToolbarView = require('../components/toolbar-view');
-const DevicesBluetoothView = require('../components/devices-bluetooth-view');
-const DevicesWifiView = require('../components/devices-wifi-view');
+const DevicesView = require('../components/devices-view');
 const $ = require("jquery");
 
 class MainController extends Controller {
@@ -14,28 +13,13 @@ class MainController extends Controller {
   initialize() {
 
     this.toolbarView = new ToolbarView();
-    this.devicesBluetoothView = new DevicesBluetoothView(this.toolbarView);
-    this.devicesWifiView = new DevicesWifiView(this.toolbarView);
+    this.devicesView = new DevicesView(this.toolbarView);
 
     this.addComponent(this.toolbarView);
-    this.addComponent(this.devicesBluetoothView);
-    this.addComponent(this.devicesWifiView);
+    this.addComponent(this.devicesView);
 
-    this.devicesBluetoothView.show();
-    this.toolbarView.selectTab('tab-bluetooth');
+    this.devicesView.show();
 
-    this.toolbarView.on(ToolbarView.EVENT_CHANGE_TAB, this.eventChangeTab.bind(this));
-
-  }
-
-  eventChangeTab(data) {
-    if(data.id == 'tab-wifi') {
-      this.devicesBluetoothView.hide();
-      this.devicesWifiView.show();
-    }else{
-      this.devicesWifiView.hide();
-      this.devicesBluetoothView.show();
-    }
   }
 
   get view() {
