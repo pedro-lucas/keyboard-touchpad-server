@@ -22,6 +22,13 @@ class WifiService extends Connection {
     io.on('connection', client => {
       // const address = client.conn.remoteAddress;
       // console.log('client', address);
+
+      const authorizeConnection = authorize => {
+        if(authorize) {
+
+        }
+      };
+
       const fAuth = info => {
         if(info === null || typeof info !== "object" || !info.name) {
           client.emit('error', i18n.__('Invalid name or object'))
@@ -29,11 +36,17 @@ class WifiService extends Connection {
           client.emit('error', i18n.__('Device is blocked'))
         }else if(info.id && info.id.length >= 10 &&  this.paired(info.id)) {
           //TODO: Emite evento que um novo dispositivo foi conectado
+          authorizeConnection(true);
         }else{
+
           let rdn = crypto.randomBytes(20).toString('hex');
           info.id = crypto.createHash('sha1').update(rdn).digest('hex');
-          
+          info.callback = authorizeConnection;
+
+          this.emit(WifiService.EVENT_REQUEST_CONNECTION, info);
+
           //TODO: Emite um evento solicitando a autorização de conexão para o dispositivo, se autorizado, adiciona o dispositivo a lista de paired
+
         }
       };
 
@@ -55,6 +68,10 @@ class WifiService extends Connection {
     //TODO: O servidor pegunta se pode conectar, caso ainda não esteja na lista de autorizados
     //TODO: Após conectar pode iniciar o envio de dados. Vamos utilizar o socket IO no projeto
 
+  }
+
+  static get EVENT_REQUEST_CONNECTION() {
+    return 'event-request-connection';
   }
 
 }
