@@ -1,6 +1,8 @@
 const $ = require('jquery');
 const ComponentView = require('./component-view');
 const Device = require('../models/device');
+const Devices = require('../services/devices');
+const WifiService = require('../services/wifi-service');
 const i18n = require("i18n");
 
 module.exports = class DevicesView extends ComponentView {
@@ -8,37 +10,41 @@ module.exports = class DevicesView extends ComponentView {
   constructor(toolbarView) {
     super();
     this.toolbarView = toolbarView;
-    this.devices = [];
     this.initialize();
   }
 
   initialize() {
+    Devices.on(Devices.EVENT_PAIR, this.addPairedDevice.bind(this));
+    Devices.on(Devices.EVENT_CONNECT, this.deviceConnected.bind(this));
+    WifiService.on(WifiService.EVENT_REQUEST_CONNECTION, this.validateRequest.bind(this));
     // this.add(new Device('', "iPhone Pedro", Device.MODE_BLUETOOTH));
     // this.add(new Device('', "Android Marcelo", Device.MODE_WIFI));
     // this.add(new Device('', "Windows Phone Fernando :)", Device.MODE_WIFI));
     // this.add(new Device('', "Donatello", Device.MODE_BLUETOOTH));
+
+    Devices.paired.forEach(device => this.add(device));
+
+  }
+
+  addPairedDevice(device) {
+
+  }
+
+  deviceConnected(device) {
+
+  }
+
+  validateRequest(info) {
+    console.log('validar', info);
   }
 
   add(device) {
-    let $deviceView = $(`<tr><td class="mdl-data-table__cell--non-numeric">${device.name}</td><td class="mdl-data-table__cell--non-numeric">${Device.getModeString(device.mode)}</td></tr>`);
-    this.devices.push(device);
+    let $deviceView = $(`<tr><td id="device-id-td-${device.id}" class="mdl-data-table__cell--non-numeric">${device.name}</td><td class="mdl-data-table__cell--non-numeric">${device.mode}</td></tr>`);
     this.tableView.find('tbody').append($deviceView);
   }
 
   remove(device) {
-      let index = -1;
-
-      if(device instanceof Device) {
-        index = this.devices.indexOf(device);
-      }else if(device instanceof Number) {
-        index = parseInt(device);
-      }
-
-      if(index >= 0 && index < this.devices.length) {
-        this.tableView.find('tbody tr').get(index).remove();
-        this.devices.splice(index, 1);
-      }
-
+    this.tableView.find("#device-id-td-"+device.id).remove();
   }
 
   show() {

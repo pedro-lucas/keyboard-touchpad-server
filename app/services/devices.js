@@ -1,12 +1,13 @@
 const Service = require('./service');
 const Store = require('electron-store');
+const store = new Store();
 
 class Devices extends Service {
 
   constructor() {
     super();
-    this.paired = Store.get('paired', []);
-    this.blocked = Store.get('blocked', []);
+    this.paired = store.get('paired', []);
+    this.blocked = store.get('blocked', []);
     this.connected = [];
   }
 
@@ -14,7 +15,7 @@ class Devices extends Service {
     if(this.paired(device) == -1) {
       this.paired.push(device);
       this.save('paired');
-      this.emit(Devices.EVENT_PAIR, device);
+      this.emit(this.EVENT_PAIR, device);
     }
   }
 
@@ -23,7 +24,7 @@ class Devices extends Service {
     if(index > -1) {
       this.paired.splice(index, 1);
       this.save('paired');
-      this.emit(Devices.EVENT_UNPAIR, device);
+      this.emit(this.EVENT_UNPAIR, device);
     }
   }
 
@@ -31,7 +32,7 @@ class Devices extends Service {
     if(this.blocked(device) == -1) {
       this.blocked.push(device);
       this.save('blocked');
-      this.emit(Devices.EVENT_BLOCK, device);
+      this.emit(this.EVENT_BLOCK, device);
     }
   }
 
@@ -40,7 +41,7 @@ class Devices extends Service {
     if(index > -1) {
       this.blocked.splice(index, 1);
       this.save('blocked');
-      this.emit(Devices.EVENT_UNBLOCK, device);
+      this.emit(this.EVENT_UNBLOCK, device);
     }
   }
 
@@ -51,13 +52,13 @@ class Devices extends Service {
         if(index > -1) {
           this.connected.splice(index, 1);
           device.removeListener('disconnect', fDisconnect);
-          this.emit(Devices.EVENT_DISCONNECT, device);
+          this.emit(this.EVENT_DISCONNECT, device);
         }
       };
       this.pair(device);
       this.connected.push(device);
       device.on('disconnect', fDisconnect);
-      this.emit(Devices.EVENT_CONNECT, device);
+      this.emit(this.EVENT_CONNECT, device);
     }
   }
 
@@ -90,30 +91,30 @@ class Devices extends Service {
     values.forEach(d => {
       filtered.push(d.toString());
     });
-    Store.set(key, filtered);
+    store.set(key, filtered);
   }
 
-  static get EVENT_CONNECT() {
+  get EVENT_CONNECT() {
     return 'event-connect';
   }
 
-  static get EVENT_DISCONNECT() {
+  get EVENT_DISCONNECT() {
     return 'event-disconnect';
   }
 
-  static get EVENT_PAIR() {
+  get EVENT_PAIR() {
     return 'event-pair';
   }
 
-  static get EVENT_UNPAIR() {
+  get EVENT_UNPAIR() {
     return 'event-unpair';
   }
 
-  static get EVENT_BLOCK() {
+  get EVENT_BLOCK() {
     return 'event-block';
   }
 
-  static get EVENT_UNBLOCK() {
+  get EVENT_UNBLOCK() {
     return 'event-unblock';
   }
 

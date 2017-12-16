@@ -24,19 +24,32 @@ class WifiService extends Connection {
 
       let gInfo = null;
 
+      const fRemoveListener = () => {
+        client.removeListener('disconnect', fRemoveListener);
+        client.removeListener('auth', fAuth);
+      };
+
       const authorizeConnection = authorize => {
         if(authorize) {
-          let device = new WifiDevice(gInfo.id, gInfo.name, client);
-          Devices.addConnectedDevice(device);
+          this.emit('authenticated', dInfo.id);
+
+          fRemoveListener();
+
+          Devices.addConnectedDevice(new WifiDevice(gInfo.id, gInfo.name, client));
         }
+        gInfo = null;
       };
 
       const fAuth = info => {
-        if(info === null || typeof info !== "object" || !info.name) {
-          client.emit('error', i18n.__('Invalid name or object'))
+
+        if(gInfo) {
+          client.emit('error', i18n.__('Invalid request'));
+        }else if(info === null || typeof info !== "object" || !info.name) {
+          client.emit('error', i18n.__('Invalid name or object'));
         }else if(info.id && info.id.length >= 10 &&  this.blocked(info.id)) {
-          client.emit('error', i18n.__('Device is blocked'))
+          client.emit('error', i18n.__('Device is blocked'));
         }else if(info.id && info.id.length >= 10 &&  this.paired(info.id)) {
+          gInfo = info;
           authorizeConnection(true);
         }else{
 
@@ -46,17 +59,11 @@ class WifiService extends Connection {
           info.id = crypto.createHash('sha1').update(rdn).digest('hex');
           info.callback = authorizeConnection;
 
-          this.emit(WifiService.EVENT_REQUEST_CONNECTION, info);
+          this.emit(this.EVENT_REQUEST_CONNECTION, info);
 
         }
       };
-
-      const fDisconnect = () => {
-        client.removeListener('disconnect', fDisconnect);
-        client.removeListener('auth', fAuth);
-      };
-
-      client.on('disconnect', fDisconnect);
+      client.on('disconnect', fRemoveListener);
       client.on('auth', fAuth);
 
       //Send welcome message
@@ -71,7 +78,7 @@ class WifiService extends Connection {
 
   }
 
-  static get EVENT_REQUEST_CONNECTION() {
+  get EVENT_REQUEST_CONNECTION() {
     return 'event-request-connection';
   }
 
