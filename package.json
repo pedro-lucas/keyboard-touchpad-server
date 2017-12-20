@@ -20,11 +20,11 @@
     "mdns": "^2.3.4",
     "octicons": "^4.4.0",
     "robotjs": "^0.4.7",
-    "socket.io": "^2.0.4",
+    "socket.io": "^1.7.3",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "electron": "^1.7.9",
+    "electron": "^1.7.10",
     "electron-packager": "^9.1.0",
     "electron-rebuild": "^1.6.0",
     "gulp": "^3.9.1"

@@ -36,6 +36,7 @@ module.exports = class DevicesView extends ComponentView {
 
   validateRequest(info) {
     console.log('validar', info);
+    //TODO: Preciso criar uma opção nas notificações que mostra 2 opções para o usuário selecionar
   }
 
   add(device) {

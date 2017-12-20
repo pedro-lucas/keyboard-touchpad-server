@@ -6,6 +6,7 @@ const io = require('socket.io')(server);
 const i18n = require("i18n");
 const PORT = 9453;
 const crypto = require('crypto');
+const electron = require('electron').remote;
 
 class WifiService extends Connection {
 
@@ -58,16 +59,20 @@ class WifiService extends Connection {
           let rdn = crypto.randomBytes(20).toString('hex');
           info.id = crypto.createHash('sha1').update(rdn).digest('hex');
           info.callback = authorizeConnection;
-
+          
           this.emit(this.EVENT_REQUEST_CONNECTION, info);
 
         }
       };
+
       client.on('disconnect', fRemoveListener);
       client.on('auth', fAuth);
 
       //Send welcome message
-      client.emit('welcome', i18n.__('Welcome to server'));
+      client.emit('welcome', {
+        message: i18n.__('Welcome to server'),
+        'screen-size': electron.screen.getPrimaryDisplay().size
+      });
 
     });
 

@@ -1,6 +1,7 @@
 const Controller = require('./controller');
 const ToolbarView = require('../components/toolbar-view');
 const DevicesView = require('../components/devices-view');
+const NotificationView = require('../library/notification-view');
 const $ = require("jquery");
 
 class MainController extends Controller {
@@ -19,6 +20,10 @@ class MainController extends Controller {
     this.addComponent(this.devicesView);
 
     this.devicesView.show();
+
+    this.toolbarView.on(ToolbarView.EVENT_ACTION_SETTINGS, () => {
+      NotificationView.error(new Error('meeeee'));
+    });
 
   }
 
