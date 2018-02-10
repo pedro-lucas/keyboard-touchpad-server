@@ -4,7 +4,8 @@
   "description": "",
   "main": "app/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "author": {
     "name": "Pedro Lucas",
@@ -24,9 +25,10 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "electron": "^1.7.10",
-    "electron-packager": "^9.1.0",
-    "electron-rebuild": "^1.6.0",
-    "gulp": "^3.9.1"
+    "electron": "^1.8.2",
+    "electron-packager": "11.0.0",
+    "electron-rebuild": "^1.7.2",
+    "gulp": "^3.9.1",
+    "jshint": "^2.9.5"
   }
 }
